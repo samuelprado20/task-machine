@@ -1,8 +1,9 @@
 import React from "react";
+import './TodoSearch.css'
 
 function TodoSearch(){
     return(
-        <input placeholder="Search task" />
+        <input className="TodoSearch" placeholder="Search task" />
     );
 }
 

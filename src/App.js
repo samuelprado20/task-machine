@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import { TodoCounter } from "./TodoCounter";
 import { TodoSearch } from "./TodoSearch";
 import { TodoList } from "./TodoList";
@@ -18,7 +18,7 @@ function App() {
       <TodoSearch />
       <TodoList >
         {tasks.map(task => (
-        <TodoItem key={task.text} text={task.text} />
+        <TodoItem key={task.text} text={task.text} completed={task.completed}/>
         ))}
       </TodoList>
       <CreateTodoButton />
