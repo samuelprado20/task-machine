@@ -2,14 +2,24 @@ import './App.css';
 import { AppUI } from './appUI'
 import { useState } from 'react';
 
-const defaultTasks = [
-  {text: 'buy onions', completed: true},
-  {text: 'call mom', completed: false},
-  {text: 'Read work emails', completed: false}
-]
+// const defaultTasks = [
+//   {text: 'buy onions', completed: true},
+//   {text: 'call mom', completed: false},
+//   {text: 'Read work emails', completed: false}
+// ]
 
 function App() {
-  const [tasks, setTasks] = useState(defaultTasks)
+  const localStorageTasks = localStorage.getItem('TASKS_V1')
+  let parsedTaks
+  //checking local storage
+  if(!localStorageTasks) {
+    localStorage.setItem('TASKS_V1', JSON.stringify([]))
+    parsedTaks = []
+  } else {
+    parsedTaks = JSON.parse(localStorageTasks)
+  }
+
+  const [tasks, setTasks] = useState(parsedTaks)
   const [searchValue, setSearchValue] = useState('')
 
   const completedTasks = tasks.filter(task => !!task.completed).length
@@ -27,29 +37,35 @@ function App() {
     })
   }
 
-  // checking task as completed
+  const saveTasks = (newTasks) => {
+    const stringifiedTasks = JSON.stringify(newTasks)
+    localStorage.setItem('TASKS_V1', stringifiedTasks)
+    setTasks(newTasks)
+  }
+
+  // marking task as completed
   const markCompleteTask = (text) => {
     const taskIndex = tasks.findIndex(task => task.text === text)
     const newTasks = [...tasks]
     newTasks[taskIndex].completed = true
 
-    setTasks(newTasks)
+    saveTasks(newTasks)
   }
-  
+
   // deleting task
   const deleteTask = (text) => {
     const taskIndex = tasks.findIndex(task => task.text === text)
     const newTasks = [...tasks]
     newTasks.splice(taskIndex, 1)
 
-    setTasks(newTasks)
+    saveTasks(newTasks)
   }
 
   return (
-    <AppUI 
-      totalTasks={totalTasks} 
+    <AppUI
+      totalTasks={totalTasks}
       completedTasks={completedTasks}
-      searchValue={searchValue} 
+      searchValue={searchValue}
       setSearchValue={setSearchValue}
       searchedTasks={searchedTasks}
       markCompleteTask={markCompleteTask}
