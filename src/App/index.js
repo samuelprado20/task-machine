@@ -8,18 +8,33 @@ import { useState } from 'react';
 //   {text: 'Read work emails', completed: false}
 // ]
 
-function App() {
-  const localStorageTasks = localStorage.getItem('TASKS_V1')
-  let parsedTaks
+// localstorage custom hook
+function useLocalStorage (itemName, initialValue) {
   //checking local storage
-  if(!localStorageTasks) {
-    localStorage.setItem('TASKS_V1', JSON.stringify([]))
-    parsedTaks = []
+  const localStorageItem = localStorage.getItem(itemName)
+  let parsedItem
+  
+  if(!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue))
+    parsedItem = initialValue
   } else {
-    parsedTaks = JSON.parse(localStorageTasks)
+    parsedItem = JSON.parse(localStorageItem)
   }
 
-  const [tasks, setTasks] = useState(parsedTaks)
+  const [item, setItem] = useState(parsedItem)
+  //save in local storage
+  const saveTasks = (newItem) => {
+    const stringifiedItem = JSON.stringify(newItem)
+    localStorage.setItem(itemName, stringifiedItem)
+    setItem(newItem)
+  }
+  
+  return [item, saveTasks]
+}
+
+function App() {
+  const [tasks, saveTasks] = useLocalStorage('TASKS_V1', [])
+
   const [searchValue, setSearchValue] = useState('')
 
   const completedTasks = tasks.filter(task => !!task.completed).length
@@ -37,11 +52,7 @@ function App() {
     })
   }
 
-  const saveTasks = (newTasks) => {
-    const stringifiedTasks = JSON.stringify(newTasks)
-    localStorage.setItem('TASKS_V1', stringifiedTasks)
-    setTasks(newTasks)
-  }
+  
 
   // marking task as completed
   const markCompleteTask = (text) => {
