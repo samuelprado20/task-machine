@@ -1,6 +1,6 @@
 import './App.css';
 import { AppUI } from './appUI'
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 // const defaultTasks = [
 //   {text: 'buy onions', completed: true},
@@ -10,30 +10,49 @@ import { useState } from 'react';
 
 // localstorage custom hook
 function useLocalStorage (itemName, initialValue) {
-  //checking local storage
-  const localStorageItem = localStorage.getItem(itemName)
-  let parsedItem
-  
-  if(!localStorageItem) {
-    localStorage.setItem(itemName, JSON.stringify(initialValue))
-    parsedItem = initialValue
-  } else {
-    parsedItem = JSON.parse(localStorageItem)
-  }
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [item, setItem] = useState(initialValue)
 
-  const [item, setItem] = useState(parsedItem)
+  React.useEffect(() => {
+    setTimeout(() => {
+      try {
+        //checking local storage
+        const localStorageItem = localStorage.getItem(itemName)
+        let parsedItem
+        
+        if(!localStorageItem) {
+          localStorage.setItem(itemName, JSON.stringify(initialValue))
+          parsedItem = initialValue
+        } else {
+          parsedItem = JSON.parse(localStorageItem)
+        }
+
+        setItem(parsedItem)
+        setLoading(false)
+      } catch (error) {
+        setError(error)
+      }
+    }, 1000)
+  })
+  
+
   //save in local storage
   const saveTasks = (newItem) => {
-    const stringifiedItem = JSON.stringify(newItem)
-    localStorage.setItem(itemName, stringifiedItem)
-    setItem(newItem)
+    try {
+      const stringifiedItem = JSON.stringify(newItem)
+      localStorage.setItem(itemName, stringifiedItem)
+      setItem(newItem)
+    } catch (error) {
+      setError(error)
+    }
   }
   
-  return [item, saveTasks]
+  return {item, saveTasks, loading, error}
 }
 
 function App() {
-  const [tasks, saveTasks] = useLocalStorage('TASKS_V1', [])
+  const {item: tasks, saveTasks, loading, error} = useLocalStorage('TASKS_V1', [])
 
   const [searchValue, setSearchValue] = useState('')
 
@@ -74,6 +93,8 @@ function App() {
 
   return (
     <AppUI
+      loading={loading}
+      error={error}
       totalTasks={totalTasks}
       completedTasks={completedTasks}
       searchValue={searchValue}
