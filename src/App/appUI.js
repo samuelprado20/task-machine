@@ -7,24 +7,28 @@ import { CreateTodoButton } from "../CreateTodoButton";
 import { TaskContext } from '../TaskContext'
 
 function AppUI () {
+    const {
+        error, 
+        loading, 
+        searchedTasks, 
+        markCompleteTask, 
+        deleteTask, 
+        totalTasks
+    } = React.useContext(TaskContext)
     return (
         <>
             <TodoCounter />
             <TodoSearch />
-            <TaskContext.Consumer>
-                {({error, loading, searchedTasks, markCompleteTask, deleteTask, totalTasks}) => (
-                    <TodoList >
-                        {/* Loading status */}
-                        {error ? <p>There's an error</p> : null}
-                        {loading ? <p>Loading...</p> : null}
-                        {(!loading && !totalTasks) ? <p>You have no tasks, try adding a new one!</p> : null}
-                        
-                        {searchedTasks.map(task => (
-                        <TodoItem key={task.text} text={task.text} completed={task.completed} onComplete={() => markCompleteTask(task.text)} onDelete={() => deleteTask(task.text)}/>
-                        ))}
-                    </TodoList>
-                )}
-            </TaskContext.Consumer>
+                <TodoList >
+                    {/* Loading status */}
+                    {error ? <p>There's an error</p> : null}
+                    {loading ? <p>Loading...</p> : null}
+                    {(!loading && !totalTasks) ? <p>You have no tasks, try adding a new one!</p> : null}
+                    
+                    {searchedTasks.map(task => (
+                    <TodoItem key={task.text} text={task.text} completed={task.completed} onComplete={() => markCompleteTask(task.text)} onDelete={() => deleteTask(task.text)}/>
+                    ))}
+                </TodoList>
             <CreateTodoButton />
         </>
     )
