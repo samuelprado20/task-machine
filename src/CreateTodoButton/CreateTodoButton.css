@@ -14,4 +14,7 @@
     align-items: center;
     height: 40px;
     width: 40px;
+    z-index: 2;
+    box-shadow: rgba(239, 239, 239, 0.15) 1.95px 1.95px 2.6px;
+    /* box-shadow: rgba(252, 252, 252, 0.15) 0px 5px 25px; */
 }

@@ -8,6 +8,8 @@ function TaskProvider (props) {
 
     const [searchValue, setSearchValue] = useState('')
 
+    const [openModal, setOpenModal] = useState(false)
+
     const completedTasks = tasks.filter(task => !!task.completed).length
     const totalTasks = tasks.length
 
@@ -41,6 +43,17 @@ function TaskProvider (props) {
         saveTasks(newTasks)
     }
 
+    // adding task
+    const addTask = (text) => {
+        const newTasks = [...tasks]
+        newTasks.push({
+            completed: false,
+            text,
+        })
+
+        saveTasks(newTasks)
+    }
+
     return (
         <TaskContext.Provider value={{
             loading,
@@ -51,7 +64,10 @@ function TaskProvider (props) {
             setSearchValue,
             searchedTasks,
             markCompleteTask,
-            deleteTask
+            addTask,
+            deleteTask,
+            openModal,
+            setOpenModal
         }}>
             {props.children}
         </TaskContext.Provider>

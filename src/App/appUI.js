@@ -5,6 +5,8 @@ import { TodoList } from "../TodoList";
 import { TodoItem } from "../TodoItem";
 import { CreateTodoButton } from "../CreateTodoButton";
 import { TaskContext } from '../TaskContext'
+import { Modal } from '../Modal'
+import { TaskForm } from '../TaskForm'
 
 function AppUI () {
     const {
@@ -13,7 +15,9 @@ function AppUI () {
         searchedTasks, 
         markCompleteTask, 
         deleteTask, 
-        totalTasks
+        totalTasks,
+        openModal,
+        setOpenModal
     } = React.useContext(TaskContext)
     return (
         <>
@@ -29,7 +33,15 @@ function AppUI () {
                     <TodoItem key={task.text} text={task.text} completed={task.completed} onComplete={() => markCompleteTask(task.text)} onDelete={() => deleteTask(task.text)}/>
                     ))}
                 </TodoList>
-            <CreateTodoButton />
+
+                {!!openModal ? 
+                    (<Modal>
+                        <TaskForm />
+                    </Modal>) 
+                    : null
+                }
+                
+            <CreateTodoButton setOpenModal={setOpenModal} />
         </>
     )
 }
