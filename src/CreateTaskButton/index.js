@@ -1,16 +1,16 @@
 import React from "react";
-import './CreateTodoButton.css'
+import './CreateTaskButton.css'
 
-function CreateTodoButton({setOpenModal}){
+function CreateTaskButton({setOpenModal}){
     const handleClick = () => {
         setOpenModal(prevState => !prevState)
     }
 
     return(
-        <button className="CreateTodoButton"
+        <button className="CreateTaskButton"
         onClick={handleClick}
         >+</button>
     );
 }
 
-export { CreateTodoButton };
+export { CreateTaskButton };

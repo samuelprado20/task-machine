@@ -1,6 +1,6 @@
 import React from "react";
-import './TodoList.css'
-function TodoList(props){
+import './TaskList.css'
+function TaskList(props){
     return(
         <section>
             <ul>
@@ -10,4 +10,4 @@ function TodoList(props){
     );
 }
 
-export { TodoList };
+export { TaskList };

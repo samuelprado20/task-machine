@@ -1,8 +1,8 @@
 import React from "react";
 import { TaskContext } from "../TaskContext";
-import './TodoSearch.css'
+import './TaskSearch.css'
 
-function TodoSearch(){
+function TaskSearch(){
     const {searchValue, setSearchValue} = React.useContext(TaskContext)    
     
     const onSearchValueChange = (event) => {
@@ -11,7 +11,7 @@ function TodoSearch(){
     }
     return(
         <input 
-            className="TodoSearch" 
+            className="TaskSearch" 
             placeholder="Search task" 
             value= {searchValue}
             onChange={onSearchValueChange}
@@ -19,4 +19,4 @@ function TodoSearch(){
     );
 }
 
-export { TodoSearch };
+export { TaskSearch };

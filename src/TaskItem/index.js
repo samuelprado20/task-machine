@@ -1,16 +1,16 @@
 import React from "react";
-import './TodoItem.css'
+import './TaskItem.css'
 
-function TodoItem(props){
+function TaskItem(props){
 
     return(
-        <li className="TodoItem">
+        <li className="TaskItem">
             <span className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
             onClick={props.onComplete}
             >
                 √
             </span>
-            <p className={`TodoItem-p ${props.completed && 'TodoItem-p--completed'}`}>{props.text}</p>
+            <p className={`TaskItem-p ${props.completed && 'TaskItem-p--completed'}`}>{props.text}</p>
             <span className="Icon Icon-delete"
             onClick={props.onDelete}
             >
@@ -20,4 +20,4 @@ function TodoItem(props){
     );
 }
 
-export { TodoItem };
+export { TaskItem };

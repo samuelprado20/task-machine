@@ -1,4 +1,4 @@
-.TodoItem {
+.TaskItem {
     background-color: #202020;
     position: relative;
     display: flex;
@@ -8,7 +8,7 @@
     border-radius: 12px;
 }
 
-.TodoItem-p {
+.TaskItem-p {
     margin: 16px 0 16px 16px;
     width: calc(100% - 120px);
     font-size: 18px;
@@ -17,7 +17,7 @@
     font-weight: 400;
 }
 
-.TodoItem-p--completed {
+.TaskItem-p--completed {
     text-decoration: line-through;
 }
 
