@@ -1,0 +1,25 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    border-radius: 12px;
+}
+
+h2 {
+    color: #FFF;
+}
+
+p {
+    color: #FFF;
+    margin: 4px 0 0 0;
+    font-size: 20px;
+}
+
+svg {
+    height: 300px;
+    margin-top: 4px;
+    color: #C84B31;
+}

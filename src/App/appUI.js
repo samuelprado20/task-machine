@@ -7,6 +7,10 @@ import { CreateTaskButton } from "../CreateTaskButton";
 import { TaskContext } from '../TaskContext'
 import { Modal } from '../Modal'
 import { TaskForm } from '../TaskForm'
+import { TasksLoading } from '../TasksLoading'
+import { TasksError } from '../TasksError'
+import { EmptyTasks } from '../EmptyTasks'
+
 
 function AppUI () {
     const {
@@ -25,9 +29,9 @@ function AppUI () {
             <TaskSearch />
                 <TaskList >
                     {/* Loading status */}
-                    {error ? <p>There's an error</p> : null}
-                    {loading ? <p>Loading...</p> : null}
-                    {(!loading && !totalTasks) ? <p>You have no tasks, try adding a new one!</p> : null}
+                    {error ? <TasksError error={error} /> : null}
+                    {loading ? <TasksLoading /> : null}
+                    {(!loading && !totalTasks) ? <EmptyTasks /> : null}
                     
                     {searchedTasks.map(task => (
                     <TaskItem key={task.text} text={task.text} completed={task.completed} onComplete={() => markCompleteTask(task.text)} onDelete={() => deleteTask(task.text)}/>
