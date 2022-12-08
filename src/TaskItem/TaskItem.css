@@ -20,33 +20,3 @@
 .TaskItem-p--completed {
     text-decoration: line-through;
 }
-
-.Icon {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    height: 48px;
-    width: 48px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #FFF;
-}
-
-.Icon-check {
-    position: absolute;
-    left: 12px
-}
-
-.Icon-check--active {
-    color: #4CAF50;
-}
-
-.Icon-delete {
-    position: absolute;
-    top: -12px;
-    right: 0;
-}
-
-.Icon-delete:hover {
-    color: red;
-}

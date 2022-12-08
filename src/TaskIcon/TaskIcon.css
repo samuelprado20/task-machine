@@ -1,0 +1,34 @@
+.Icon-container {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    height: 48px;
+    width: 48px;
+}
+
+.Icon-container--check {
+    position: absolute;
+    top: 15px;
+    left: 12px;
+}
+
+.Icon-container--delete {
+    position: absolute;
+    top: 15px;
+    right: 0;
+}
+
+.Icon-svg {
+    margin-top: 0;
+    width: 24px;
+    height: 24px;
+    transition: stroke .24s;
+}
+
+.Icon-container:hover .Icon-svg--check {
+    stroke: #4caf50;
+}
+
+.Icon-container:hover .Icon-svg--delete {
+    stroke: red;
+}
