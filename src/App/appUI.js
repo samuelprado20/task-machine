@@ -10,6 +10,7 @@ import { TaskForm } from '../TaskForm'
 import { TasksLoading } from '../TasksLoading'
 import { TasksError } from '../TasksError'
 import { EmptyTasks } from '../EmptyTasks'
+import { TaskHeader } from "../TaskHeader";
 
 
 function AppUI () {
@@ -21,29 +22,34 @@ function AppUI () {
         deleteTask, 
         totalTasks,
         openModal,
-        setOpenModal
+        setOpenModal,
+        completedTasks,
+        searchValue, 
+        setSearchValue
     } = React.useContext(TaskContext)
     return (
         <>
-            <TaskCounter />
-            <TaskSearch />
-                <TaskList >
-                    {/* Loading status */}
-                    {error ? <TasksError error={error} /> : null}
-                    {loading ? <TasksLoading /> : null}
-                    {(!loading && !totalTasks) ? <EmptyTasks /> : null}
-                    
-                    {searchedTasks.map(task => (
-                    <TaskItem key={task.text} text={task.text} completed={task.completed} onComplete={() => markCompleteTask(task.text)} onDelete={() => deleteTask(task.text)}/>
-                    ))}
-                </TaskList>
+            <TaskHeader>
+                <TaskCounter totalTasks={totalTasks} completedTasks={completedTasks}/>
+                <TaskSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
+            </TaskHeader>
+            <TaskList >
+                {/* Loading status */}
+                {error ? <TasksError error={error} /> : null}
+                {loading ? <TasksLoading /> : null}
+                {(!loading && !totalTasks) ? <EmptyTasks /> : null}
+                
+                {searchedTasks.map(task => (
+                <TaskItem key={task.text} text={task.text} completed={task.completed} onComplete={() => markCompleteTask(task.text)} onDelete={() => deleteTask(task.text)}/>
+                ))}
+            </TaskList>
 
-                {!!openModal ? 
-                    (<Modal>
-                        <TaskForm />
-                    </Modal>) 
-                    : null
-                }
+            {!!openModal ? 
+                (<Modal>
+                    <TaskForm />
+                </Modal>) 
+                : null
+            }
                 
             <CreateTaskButton setOpenModal={setOpenModal} />
         </>
