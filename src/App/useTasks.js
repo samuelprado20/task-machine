@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import { useLocalStorage } from "./useLocalStorage";
 
-const TaskContext = React.createContext()
 
-function TaskProvider (props) {
+function useTasks () {
     const {item: tasks, saveTasks, loading, error} = useLocalStorage('TASKS_V1', [])
 
     const [searchValue, setSearchValue] = useState('')
@@ -54,25 +53,20 @@ function TaskProvider (props) {
         saveTasks(newTasks)
     }
 
-    return (
-        <TaskContext.Provider value={{
-            loading,
-            error,
-            totalTasks,
-            completedTasks,
-            searchValue,
-            setSearchValue,
-            searchedTasks,
-            markCompleteTask,
-            addTask,
-            deleteTask,
-            openModal,
-            setOpenModal
-        }}>
-            {props.children}
-        </TaskContext.Provider>
-
-    )
+    return {
+        loading,
+        error,
+        totalTasks,
+        completedTasks,
+        searchValue,
+        setSearchValue,
+        searchedTasks,
+        markCompleteTask,
+        addTask,
+        deleteTask,
+        openModal,
+        setOpenModal
+    }
 } 
 
-export {TaskContext, TaskProvider}
+export { useTasks }
