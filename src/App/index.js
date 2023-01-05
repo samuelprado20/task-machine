@@ -35,15 +35,26 @@ function App() {
             <TaskCounter totalTasks={totalTasks} completedTasks={completedTasks}/>
             <TaskSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
         </TaskHeader>
-        <TaskList >
-            {/* Loading status */}
-            {error ? <TasksError error={error} /> : null}
-            {loading ? <TasksLoading /> : null}
-            {(!loading && !totalTasks) ? <EmptyTasks /> : null}
-            
-            {searchedTasks.map(task => (
-            <TaskItem key={task.text} text={task.text} completed={task.completed} onComplete={() => markCompleteTask(task.text)} onDelete={() => deleteTask(task.text)}/>
-            ))}
+
+        <TaskList
+          error={error}
+          loading={loading}
+          searchedTasks={searchedTasks}
+          totalTasks={totalTasks}
+          searchText={searchValue}
+          onError={() => <TasksError error={error}/>}
+          onLoading={() => <TasksLoading />}
+          onEmptyTasks={() => <EmptyTasks />}
+          onEmptySearchResults={(searchText) => <p>No results for {searchText}</p>}
+          render={task => <TaskItem 
+            key={task.text} 
+            text={task.text} 
+            completed={task.completed} 
+            onComplete={() => markCompleteTask(task.text)} 
+            onDelete={() => deleteTask(task.text)}
+          />}
+        >
+        
         </TaskList>
 
         {!!openModal ? 
