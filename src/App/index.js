@@ -31,9 +31,15 @@ function App() {
   } = useTasks()
   return (
     <>
-        <TaskHeader>
-            <TaskCounter totalTasks={totalTasks} completedTasks={completedTasks}/>
-            <TaskSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
+        <TaskHeader loading={loading}>
+            <TaskCounter 
+              totalTasks={totalTasks} 
+              completedTasks={completedTasks} 
+            />
+            <TaskSearch 
+              searchValue={searchValue} 
+              setSearchValue={setSearchValue} 
+            />
         </TaskHeader>
 
         <TaskList

@@ -4,3 +4,7 @@
     color: #FFF;
     padding: 32px;
 }
+
+.TaskCounter--loading {
+    opacity: 25%;
+}

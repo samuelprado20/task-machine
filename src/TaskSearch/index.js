@@ -1,7 +1,7 @@
 import React from "react";
 import './TaskSearch.css'
 
-function TaskSearch({searchValue, setSearchValue}){    
+function TaskSearch({searchValue, setSearchValue, loading}){    
     
     const onSearchValueChange = (event) => {
         console.log(event.target.value)
@@ -13,6 +13,7 @@ function TaskSearch({searchValue, setSearchValue}){
             placeholder="Search task" 
             value= {searchValue}
             onChange={onSearchValueChange}
+            disabled={loading}
         />
     );
 }
