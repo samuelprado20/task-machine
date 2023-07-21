@@ -6,7 +6,7 @@ function TasksLoading () {
         <div className="LoadingTask-container">
             <p className="LoadingTask-text">Loading Tasks</p>
             
-            <div class="lds-ellipsis">
+            <div className="lds-ellipsis">
                 <div></div>
                 <div></div>
                 <div></div>

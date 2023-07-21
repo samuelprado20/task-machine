@@ -1,9 +1,15 @@
-import React, {useState} from "react";
+import { useState } from "react";
 import { useLocalStorage } from "./useLocalStorage";
 
 
 function useTasks () {
-    const {item: tasks, saveTasks, loading, error} = useLocalStorage('TASKS_V1', [])
+    const {
+        item: tasks, 
+        saveTasks, 
+        loading, 
+        error,
+        synchronizeItem: synchronizeTasks
+    } = useLocalStorage('TASKS_V1', [])
 
     const [searchValue, setSearchValue] = useState('')
 
@@ -65,7 +71,8 @@ function useTasks () {
         addTask,
         deleteTask,
         openModal,
-        setOpenModal
+        setOpenModal,
+        synchronizeTasks
     }
 } 
 

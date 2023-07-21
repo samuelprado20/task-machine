@@ -12,6 +12,7 @@ import { TaskSearch } from "../TaskSearch";
 import { TaskList } from "../TaskList";
 import { TaskItem } from "../TaskItem";
 import { CreateTaskButton } from "../CreateTaskButton";
+import { ChangeAlertWithStorageListener } from "../ChangeAlert"
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
     searchValue, 
     setSearchValue,
     addTask,
+    synchronizeTasks
   } = useTasks()
   return (
     <>
@@ -71,6 +73,10 @@ function App() {
         }
             
         <CreateTaskButton setOpenModal={setOpenModal} />
+
+        <ChangeAlertWithStorageListener  
+          synchronize={synchronizeTasks}
+        />
     </>
   )
 }
